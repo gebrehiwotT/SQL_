@@ -1,0 +1,8 @@
+select hk.hacker_id,hk.name from Submissions sb 
+    inner join Challenges cl on  sb.challenge_id = cl.challenge_id
+       inner join Difficulty df on df.difficulty_level = cl.difficulty_level 
+           inner join hackers hk on hk.hacker_id = sb.hacker_id 
+            where  sb.score = df.score and cl.difficulty_level = df.difficulty_level
+            group by hk.hacker_id,hk.name
+            having count(hk.hacker_id)>1
+ order by count(cl.challenge_id) desc,hk.hacker_id;
